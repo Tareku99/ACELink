@@ -1,0 +1,302 @@
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius2);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 840;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnPrimary {
+  min-height: 38px;
+  padding: 0 14px;
+  background: var(--text);
+  color: var(--accentText);
+  border: 1px solid var(--text);
+  font-size: 12px;
+  font-weight: 820;
+  cursor: pointer;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionStatus {
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 680;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.resultTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 860;
+}
+
+.okBadge {
+  font-size: 11px;
+  font-weight: 820;
+  color: var(--good);
+  background: color-mix(in srgb, var(--good) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--good) 28%, var(--line));
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.failBadge {
+  font-size: 11px;
+  font-weight: 820;
+  color: var(--bad);
+  background: color-mix(in srgb, var(--bad) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--bad) 28%, var(--line));
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.error {
+  font-size: 13px;
+  color: var(--bad);
+  font-weight: 680;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.summary {
+  padding: 10px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.summary span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+.summary strong {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 840;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnPrimary {
+  min-height: 38px;
+  padding: 0 14px;
+  background: var(--text);
+  color: var(--accentText);
+  border: 1px solid var(--text);
+  font-size: 12px;
+  font-weight: 820;
+  cursor: pointer;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionStatus {
+  font-size: 12px;
+  color: var(--text2);
+  font-weight: 680;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.resultTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 860;
+}
+
+.okBadge {
+  font-size: 11px;
+  font-weight: 820;
+  color: var(--good);
+  background: color-mix(in srgb, var(--good) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--good) 28%, var(--line));
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.failBadge {
+  font-size: 11px;
+  font-weight: 820;
+  color: var(--bad);
+  background: color-mix(in srgb, var(--bad) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--bad) 28%, var(--line));
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.error {
+  font-size: 13px;
+  color: var(--bad);
+  font-weight: 680;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.summary {
+  padding: 10px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.summary span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+.summary strong {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 840;
+}
+
+.empty {
+  font-size: 12px;
+  color: var(--text3);
+  padding: 12px 0;
+}
+
+.logList {
+  display: flex;
+  flex-direction: column;
+}
+
+.logRow {
+  display: grid;
+  grid-template-columns: 84px 68px 1fr;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.logRow:last-child {
+  border-bottom: none;
+}
+
+.logTime {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.logLevel {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.logMsg {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.level_info {
+  color: var(--text2);
+}
+
+.level_warn {
+  color: var(--warn);
+}
+
+.level_error {
+  color: var(--bad);
+}
+
+@media (max-width: 680px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .logRow {
+    grid-template-columns: 68px 1fr;
+  }
+
+  .logLevel {
+    display: none;
+  }
+}

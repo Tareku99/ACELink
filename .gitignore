@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+.env
+.env.*
+!.env.example
+*.log
+
+# Web UI source is tracked, build output and deps are generated locally
+webui/**
+!webui/src/
+!webui/src/**
+!webui/index.html
+!webui/package.json
+!webui/package-lock.json
+!webui/vite.config.js
+
+# Generated frontend artifacts
+webui/dist/
+webui/node_modules/
+node_modules/
+dist/
+.vite/
+acelink.config.json
+TODO.local.md
+AGENTS.md
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor
+*.swp
+*~

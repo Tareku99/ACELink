@@ -1,0 +1,365 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius2);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.titleLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.deviceId {
+  font-weight: 820;
+  font-size: 18px;
+}
+
+.fw {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  background: var(--surface2);
+  padding: 3px 7px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(520px, 3fr) minmax(360px, 2fr);
+  gap: 1px;
+  background: var(--line);
+}
+
+.slotsPanel,
+.sideRail {
+  background: var(--surface);
+  min-width: 0;
+}
+
+.slotsPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+}
+
+.sideRail {
+  background: var(--surface);
+}
+
+.sideSection {
+  background: var(--surface);
+  padding: 14px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.sectionHead h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 860;
+}
+
+.sectionHead p {
+  margin: 3px 0 0;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.sectionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.loadedBadge {
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface2);
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.sectionActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btnCompact,
+.btnCompactDanger,
+.btnCompactSecondary {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 820;
+}
+
+.btnCompact {
+  background: var(--text);
+  color: var(--accentText);
+  border-color: var(--text);
+}
+
+.btnCompactDanger {
+  background: color-mix(in srgb, var(--bad) 10%, var(--surface));
+  color: var(--bad);
+  border-color: color-mix(in srgb, var(--bad) 30%, var(--line));
+}
+
+.btnCompactSecondary {
+  background: var(--surface2);
+  color: var(--text2);
+}
+
+.slots {
+  flex: 1;
+  display: grid;
+  grid-template-rows: repeat(4, minmax(72px, 1fr));
+  gap: 8px;
+}
+
+.presetsPanel {
+  padding: 14px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.presetSave {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) auto auto;
+  gap: 8px;
+}
+
+.presetInput {
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.presetInput:focus {
+  border-color: var(--line2);
+  outline: none;
+}
+
+.presetEmpty {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.presetCard {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.presetCard:hover {
+  border-color: var(--text);
+}
+
+.presetCardActive {
+  border-color: color-mix(in srgb, var(--good) 42%, var(--line));
+  background: color-mix(in srgb, var(--good) 8%, var(--surface2));
+}
+
+.presetInfo {
+  min-width: 0;
+}
+
+.presetNameRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.presetNameRow span {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 820;
+}
+
+.presetNameRow em {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--good) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--good) 35%, var(--line));
+  color: var(--good);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+}
+
+.presetValues {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.presetValues div {
+  min-width: 0;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.presetValues span {
+  display: block;
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 820;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.presetValues strong {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
+.presetActions {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  gap: 6px;
+}
+
+.btnPresetLoad,
+.btnDeletePreset {
+  flex: 1;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 820;
+}
+
+.btnPresetLoad {
+  background: var(--text);
+  color: var(--accentText);
+  border-color: var(--text);
+}
+
+.btnDeletePreset {
+  background: color-mix(in srgb, var(--bad) 10%, var(--surface));
+  color: var(--bad);
+  border-color: color-mix(in srgb, var(--bad) 30%, var(--line));
+}
+
+.btnPresetLoad:hover,
+.btnPresetLoad:hover {
+  border-color: var(--text);
+}
+
+.btnDeletePreset:hover {
+  background: color-mix(in srgb, var(--bad) 16%, var(--surface));
+  border-color: color-mix(in srgb, var(--bad) 42%, var(--line));
+}
+
+@media (max-width: 980px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .presetGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .titleBar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sectionHead {
+    flex-direction: column;
+  }
+
+  .sectionActions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .sectionActions button {
+    flex: 1;
+  }
+
+  .presetSave {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .presetGrid {
+    grid-template-columns: 1fr;
+  }
+}
