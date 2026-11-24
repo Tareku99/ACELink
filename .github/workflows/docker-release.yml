@@ -31,7 +31,7 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Add test summary
         if: always()
-        uses: Tareku99/shared-devops/.github/actions/ci-summary@9ab5230421a78fdccdc4fbe51b71a72fd92c2899
+        uses: Tareku99/.github/.github/actions/ci-summary@cd06ab688b1092a2018b9de3cee09226daa3a204
         with:
           test-outcome: ${{ steps.test.outcome }}
           source-sha: ${{ steps.source.outputs.sha }}
@@ -39,7 +39,7 @@ jobs:
 
   build:
     needs: test
-    uses: Tareku99/shared-devops/.github/workflows/docker-build.yml@a9d2beb9f2c0015f3ca455c0a21b01a869949eb2
+    uses: Tareku99/.github/.github/workflows/docker-build.yml@cd06ab688b1092a2018b9de3cee09226daa3a204
     with:
       image: ghcr.io/tareku99/acelink
       source_image: local-build:ci-${{ github.run_id }}-${{ github.run_attempt }}
@@ -53,7 +53,7 @@ jobs:
     permissions: {}
     steps:
       - name: Report workflow results
-        uses: Tareku99/shared-devops/.github/actions/ci-summary@9ab5230421a78fdccdc4fbe51b71a72fd92c2899
+        uses: Tareku99/.github/.github/actions/ci-summary@cd06ab688b1092a2018b9de3cee09226daa3a204
         with:
           jobs: ${{ toJSON(needs) }}
           source-sha: ${{ needs.test.outputs.source_sha }}
