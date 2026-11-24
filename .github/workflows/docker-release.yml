@@ -12,15 +12,30 @@ jobs:
   test:
     name: test
     runs-on: ubuntu-24.04
+    outputs:
+      source_sha: ${{ steps.source.outputs.sha }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+      - name: Record source commit
+        id: source
+        shell: bash
+        run: printf 'sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - run: python -m pip install -r requirements.txt
-      - run: python -m unittest discover -s tests
+      - name: Run tests
+        id: test
+        run: python -m unittest discover -s tests
+      - name: Add test summary
+        if: always()
+        uses: Tareku99/shared-devops/.github/actions/ci-summary@9ab5230421a78fdccdc4fbe51b71a72fd92c2899
+        with:
+          test-outcome: ${{ steps.test.outcome }}
+          source-sha: ${{ steps.source.outputs.sha }}
+
 
   build:
     needs: test
@@ -29,3 +44,16 @@ jobs:
       image: ghcr.io/tareku99/acelink
       source_image: local-build:ci-${{ github.run_id }}-${{ github.run_attempt }}
       smoke_test_script: tests/smoke_container.sh
+
+  summary:
+    name: Workflow summary
+    needs: [test, build]
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions: {}
+    steps:
+      - name: Report workflow results
+        uses: Tareku99/shared-devops/.github/actions/ci-summary@9ab5230421a78fdccdc4fbe51b71a72fd92c2899
+        with:
+          jobs: ${{ toJSON(needs) }}
+          source-sha: ${{ needs.test.outputs.source_sha }}

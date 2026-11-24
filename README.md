@@ -156,6 +156,10 @@ python main.py --debug
 
 Open `http://localhost:8765`. Mock mode starts the same web UI without an ACE. For native hardware testing, run `python main.py` after setting up the serial adapter.
 
+## Support
+
+[Support](https://github.com/Tareku99/.github/blob/main/SUPPORT.md) · [Security reporting](https://github.com/Tareku99/.github/blob/main/SECURITY.md) · [License](LICENSE)
+
 ## Credits
 
 ACELink protocol and connectivity knowledge is derived from:
