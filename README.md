@@ -58,7 +58,7 @@ ACE 2 Pro requires a USB-to-RS485 adapter. Community-validated with CH340-based 
 |---|---|---|
 | `GND` | Ground | Always required |
 | `A` (`485+`) | `D+` or `D-` | Swap if commands time out |
-| `B` (`485-`) | The other of `D+`/`D-` | Swap if commands time out |
+| `B` (`485-`) | The other of `D+`/ `D-` | Swap if commands time out |
 | `VCC` | Do not connect | Always leave disconnected |
 
 **If the adapter enumerates but ACE commands time out:** keep `GND` connected and swap the `A`/`B` pair. A working link will show real temperature and status values.
@@ -80,7 +80,27 @@ ACELINK_DEVICE_GID=20
 
 Replace both example values. Run `docker compose up -d --build`, then open `http://localhost:8765`. In **Settings**, set the serial path to `/dev/ttyACELink`, the path mapped by Compose. Compose persists the settings in the `acelink-data` volume. Use `docker compose logs -f` for troubleshooting.
 
+### Migrating native settings
+
+Before starting the service, you can copy the native `acelink.config.json` into the persistent volume. Keep an untouched backup; the copy in the volume is used by Docker and updated by the web UI.
+
+```bash
+docker compose run --rm --no-deps \
+  -v "$PWD/acelink.config.json:/tmp/native-settings.json:ro" \
+  --entrypoint sh acelink -c \
+  'cp /tmp/native-settings.json /data/acelink.config.json'
+docker compose up -d
+```
+
+Set `.env` first, as shown above. This copies the file into the named volume as the container's non-root user. Confirm the serial path in **Settings** because Compose maps the host device to `/dev/ttyACELink`.
+
 To reach the UI from another computer on your local network, set `ACELINK_BIND_ADDRESS` to the Docker host's LAN IP and recreate the service. Use `ACELINK_HOST_PORT` to change the host port.
+
+### GHCR image releases
+
+The Compose file remains local-build-only for now. A GHCR release workflow is prepared, but publishing stays disabled until real serial adapters have been tested through the Linux container, including after container recreation.
+
+After those checks, beta publishing can be enabled with the repository variable `ACELINK_BETA_PUBLISH_ENABLED=true`. Run the workflow from `main` and enter the branch to publish. Production publishing uses `ACELINK_PRODUCTION_PUBLISH_ENABLED=true`; pushes to `main` and `v*` tags then publish to `ghcr.io/tareku99/acelink`. Both variables are unset until the hardware checks pass. The image currently targets `linux/amd64`.
 
 ## Native install scripts
 
