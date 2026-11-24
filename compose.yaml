@@ -1,0 +1,16 @@
+services:
+  acelink:
+    build: .
+    image: acelink:local
+    restart: unless-stopped
+    ports:
+      - "${ACELINK_BIND_ADDRESS:-127.0.0.1}:${ACELINK_HOST_PORT:-8765}:8765"
+    devices:
+      - "${ACELINK_DEVICE:?Set ACELINK_DEVICE to the host serial device}:/dev/ttyACELink"
+    group_add:
+      - "${ACELINK_DEVICE_GID:?Set ACELINK_DEVICE_GID to the serial device group ID}"
+    volumes:
+      - acelink-data:/data
+
+volumes:
+  acelink-data:

@@ -6,12 +6,13 @@ read and update them directly.
 """
 
 import json
+import os
 from pathlib import Path
 
 from pydantic import BaseModel, Field, ValidationError, field_validator
 
 ROOT = Path(__file__).resolve().parent
-CONFIG_PATH = ROOT / "acelink.config.json"
+CONFIG_PATH = Path(os.environ.get("ACELINK_CONFIG_PATH") or ROOT / "acelink.config.json")
 
 DEVICE_MODELS = {"auto", "ace_pro", "ace_2_pro"}
 
@@ -85,6 +86,7 @@ def load_settings() -> AcelinkSettings:
 
 
 def save_settings(settings: AcelinkSettings) -> None:
+    CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
     CONFIG_PATH.write_text(
         json.dumps(settings.model_dump(), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",

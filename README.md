@@ -65,41 +65,30 @@ ACE 2 Pro requires a USB-to-RS485 adapter. Community-validated with CH340-based 
 
 ---
 
-## Quick Start
+## Run with Docker Compose on Linux
 
-### Requirements
+The Compose example builds from this checkout. It is a preview for Linux hosts with Docker Compose and the ACE adapter plugged into the host. CI verifies the container in mock mode; real serial adapter testing in Docker is still pending.
 
-- Python 3.11+
-- Node.js (for frontend build)
+1. Find the serial adapter under `/dev/serial/by-id/` or check for a device such as `/dev/ttyUSB0`.
+2. Run `stat -Lc '%g' /path/to/serial-device` to get its numeric group ID.
+3. Create a `.env` file beside `compose.yaml` with your device path and group ID.
 
-### Install
-
-```bash
-# macOS / Linux
-scripts/install.sh
-
-# Windows PowerShell
-scripts/install.ps1
+```dotenv
+ACELINK_DEVICE=/dev/serial/by-id/replace-with-your-adapter
+ACELINK_DEVICE_GID=20
 ```
 
-### Run
+Replace both example values. Run `docker compose up -d --build`, then open `http://localhost:8765`. In **Settings**, set the serial path to `/dev/ttyACELink`, the path mapped by Compose. Compose persists the settings in the `acelink-data` volume. Use `docker compose logs -f` for troubleshooting.
 
-```bash
-# Production mode
-scripts/run.sh        # macOS / Linux
-scripts/run.ps1       # Windows
+To reach the UI from another computer on your local network, set `ACELINK_BIND_ADDRESS` to the Docker host's LAN IP and recreate the service. Use `ACELINK_HOST_PORT` to change the host port.
 
-# Mock mode (UI development, no hardware)
-python main.py --debug
-```
+## Native install scripts
 
-Open `http://localhost:8765` in a browser.
-
----
+The existing scripts remain available for Windows, macOS, and direct hardware testing. Install Python 3.11+ and Node.js. On Linux or macOS use `scripts/install.sh` or `scripts/run.sh`. On Windows use `scripts/install.ps1` or `scripts/run.ps1`.
 
 ## Configuration
 
-Configured in `acelink.config.json`. The web UI Settings tab provides a form for all options.
+Native runs store settings in `acelink.config.json` next to the app. The container stores settings in `/data/acelink.config.json`. The web UI Settings tab provides a form for all options.
 
 | Field | Default | Description |
 |---|---|---|
@@ -153,20 +142,23 @@ Save and recall temperature/duration profiles. The preset name is its identity �
 
 ---
 
-## Development
+## Local development
 
 ```bash
-# Run mock mode for UI development (no hardware)
-python main.py --debug
-
-# Build frontend
-cd webui && npm run build
-
-# Run tests
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+npm --prefix webui ci
+npm --prefix webui run build
 python -m unittest discover -s tests
+python main.py --debug
 ```
 
----
+Open `http://localhost:8765`. Mock mode starts the same web UI without an ACE. For native hardware testing, run `python main.py` after setting up the serial adapter.
+
+## Support
+
+[Support](https://github.com/Tareku99/.github/blob/main/SUPPORT.md) · [Security reporting](https://github.com/Tareku99/.github/blob/main/SECURITY.md) · [License](LICENSE)
 
 ## Credits
 
