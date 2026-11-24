@@ -80,6 +80,20 @@ ACELINK_DEVICE_GID=20
 
 Replace both example values. Run `docker compose up -d --build`, then open `http://localhost:8765`. In **Settings**, set the serial path to `/dev/ttyACELink`, the path mapped by Compose. Compose persists the settings in the `acelink-data` volume. Use `docker compose logs -f` for troubleshooting.
 
+### Migrating native settings
+
+Before starting the service, you can copy the native `acelink.config.json` into the persistent volume. Keep an untouched backup; the copy in the volume is used by Docker and updated by the web UI.
+
+```bash
+docker compose run --rm --no-deps \
+  -v "$PWD/acelink.config.json:/tmp/native-settings.json:ro" \
+  --entrypoint sh acelink -c \
+  'cp /tmp/native-settings.json /data/acelink.config.json'
+docker compose up -d
+```
+
+Set `.env` first, as shown above. This copies the file into the named volume as the container's non-root user. Confirm the serial path in **Settings** because Compose maps the host device to `/dev/ttyACELink`.
+
 To reach the UI from another computer on your local network, set `ACELINK_BIND_ADDRESS` to the Docker host's LAN IP and recreate the service. Use `ACELINK_HOST_PORT` to change the host port.
 
 ### GHCR image releases
