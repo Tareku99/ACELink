@@ -1,0 +1,31 @@
+name: Docker checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m unittest discover -s tests
+
+  build:
+    needs: test
+    uses: Tareku99/shared-devops/.github/workflows/docker-build.yml@a9d2beb9f2c0015f3ca455c0a21b01a869949eb2
+    with:
+      image: ghcr.io/tareku99/acelink
+      source_image: local-build:ci-${{ github.run_id }}-${{ github.run_attempt }}
+      smoke_test_script: tests/smoke_container.sh
