@@ -42,6 +42,12 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
+      - name: Validate Compose configuration
+        env:
+          ACELINK_DEVICE: /dev/ttyACM0
+          ACELINK_DEVICE_GID: "20"
+        run: docker compose config --quiet
+
       - name: Run tests
         id: test
         run: python -m unittest discover -s tests
