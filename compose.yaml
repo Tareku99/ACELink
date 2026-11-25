@@ -1,7 +1,7 @@
 services:
   acelink:
-    build: .
-    image: acelink:local
+    image: "${ACELINK_IMAGE:-ghcr.io/tareku99/acelink:latest}"
+    pull_policy: always
     restart: unless-stopped
     ports:
       - "${ACELINK_BIND_ADDRESS:-127.0.0.1}:${ACELINK_HOST_PORT:-8765}:8765"

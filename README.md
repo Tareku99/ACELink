@@ -67,7 +67,7 @@ ACE 2 Pro requires a USB-to-RS485 adapter. Community-validated with CH340-based 
 
 ## Run with Docker Compose on Linux
 
-The Compose example builds from this checkout. It is a preview for Linux hosts with Docker Compose and the ACE adapter plugged into the host. CI verifies the container in mock mode; real serial adapter testing in Docker is still pending.
+Compose pulls the published GHCR image. CI builds and smoke-tests the container in mock mode and validates the Compose configuration. These instructions assume your adapter, wiring, and host device permissions work; physical serial communication through Docker has not been tested in this release.
 
 1. Find the serial adapter under `/dev/serial/by-id/` or check for a device such as `/dev/ttyUSB0`.
 2. Run `stat -Lc '%g' /path/to/serial-device` to get its numeric group ID.
@@ -78,7 +78,7 @@ ACELINK_DEVICE=/dev/serial/by-id/replace-with-your-adapter
 ACELINK_DEVICE_GID=20
 ```
 
-Replace both example values. Run `docker compose up -d --build`, then open `http://localhost:8765`. In **Settings**, set the serial path to `/dev/ttyACELink`, the path mapped by Compose. Compose persists the settings in the `acelink-data` volume. Use `docker compose logs -f` for troubleshooting.
+Replace both example values. Run `docker compose up -d`, then open `http://localhost:8765`. Compose pulls `ghcr.io/tareku99/acelink:latest` and checks for updates each time the service starts. In **Settings**, set the serial path to `/dev/ttyACELink`, the path mapped by Compose. Compose persists the settings in the `acelink-data` volume. Use `docker compose logs -f` for troubleshooting.
 
 ### Migrating native settings
 
@@ -96,11 +96,9 @@ Set `.env` first, as shown above. This copies the file into the named volume as 
 
 To reach the UI from another computer on your local network, set `ACELINK_BIND_ADDRESS` to the Docker host's LAN IP and recreate the service. Use `ACELINK_HOST_PORT` to change the host port.
 
-### GHCR image releases
+### Published GHCR image
 
-The Compose file remains local-build-only for now. A GHCR release workflow is prepared, but publishing stays disabled until real serial adapters have been tested through the Linux container, including after container recreation.
-
-After those checks, beta publishing can be enabled with the repository variable `ACELINK_BETA_PUBLISH_ENABLED=true`. Run the workflow from `main` and enter the branch to publish. Production publishing uses `ACELINK_PRODUCTION_PUBLISH_ENABLED=true`; pushes to `main` and `v*` tags then publish to `ghcr.io/tareku99/acelink`. Both variables are unset until the hardware checks pass. The image currently targets `linux/amd64`.
+The production image is `ghcr.io/tareku99/acelink:latest`. Pushes to `main` update the `main` and `latest` tags; version tags also publish a matching tag and `latest`. Beta builds are published as `beta` and `beta-<12-character-commit>`. The `beta` tag may change with each beta release. Set `ACELINK_IMAGE=ghcr.io/tareku99/acelink:beta` in `.env` to try it. The image targets `linux/amd64`.
 
 ## Native install scripts
 
