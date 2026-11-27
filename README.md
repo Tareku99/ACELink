@@ -165,8 +165,8 @@ Save and recall temperature/duration profiles. The preset name is its identity â
 Clone the ACELink source and run these commands from the checkout:
 
 ```bash
-git clone https://github.com/Tareku99/ace-link.git
-cd ace-link
+git clone https://github.com/Tareku99/acelink.git
+cd acelink
 python -m venv .venv
 source .venv/bin/activate  # PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
